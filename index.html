@@ -79,6 +79,68 @@
         <article class="panel"><h2>Datenschutz & Daten</h2><p class="muted">Deine Einträge bleiben in diesem Browser auf deinem Gerät. Du kannst sie exportieren oder zurücksetzen.</p><div class="button-row"><button class="secondary-btn" id="exportBtn">Daten exportieren</button><button class="danger-btn" id="resetBtn">Alle Daten löschen</button></div></article>
       </section>
 
+<section class="view" id="avatarView">
+  <div class="page-heading">
+    <div class="eyebrow">DEIN PERSÖNLICHER CHARAKTER</div>
+    <h1>Mein Avatar</h1>
+    <p>Gestalte deinen eigenen PULSE-Läufer.</p>
+  </div>
+
+  <article class="panel avatar-preview-panel">
+    <div class="panel-heading">
+      <h2>Dein Charakter</h2>
+      <span class="status-dot">● DEIN AVATAR</span>
+    </div>
+    <div id="avatarPreview" class="avatar-preview">
+      <div class="avatar-character">
+        <div class="avatar-head">🙂</div>
+        <div class="avatar-body">👕</div>
+        <div class="avatar-legs">👟</div>
+      </div>
+    </div>
+    <p class="muted">Dein Charakter wird später auch auf PULSE LIVE angezeigt.</p>
+  </article>
+
+  <article class="panel">
+    <h2>Hautfarbe</h2>
+    <div id="skinOptions" class="avatar-options">
+      <button data-skin="#f1c7a5">Hell</button>
+      <button data-skin="#d99b70">Mittel</button>
+      <button data-skin="#a96845">Dunkel</button>
+      <button data-skin="#70452f">Sehr dunkel</button>
+    </div>
+  </article>
+
+  <article class="panel">
+    <h2>Frisur</h2>
+    <div id="hairOptions" class="avatar-options">
+      <button data-hair="Kurz">Kurz</button>
+      <button data-hair="Modern">Modern</button>
+      <button data-hair="Lang">Lang</button>
+      <button data-hair="Glatze">Glatze</button>
+    </div>
+  </article>
+
+  <article class="panel">
+    <h2>Laufshirt</h2>
+    <div id="shirtOptions" class="avatar-options">
+      <button data-shirt="#83c8ff">Blau</button>
+      <button data-shirt="#70d6a0">Grün</button>
+      <button data-shirt="#ff8c91">Rot</button>
+      <button data-shirt="#f4f7fb">Weiß</button>
+    </div>
+  </article>
+
+  <article class="panel">
+    <h2>Dein Avatar-Name</h2>
+    <label>
+      Name
+      <input id="avatarName" maxlength="20" placeholder="Mein Läufername">
+    </label>
+    <button class="primary-btn" id="saveAvatar">Avatar speichern ✦</button>
+  </article>
+</section>
+
       <section class="view" id="settingsView">
         <div class="page-heading"><div class="eyebrow">PULSE</div><h1>Einstellungen</h1></div>
         <article class="panel"><h2>Dein Trainingsziel</h2><label>Hauptziel<select id="goal"><option>Allgemeine Leistungssteigerung</option><option>10 km unter 40 Minuten</option><option>Halbmarathon unter 1:30 Stunden</option><option>Marathon unter 3 Stunden</option><option>Muskelaufbau und Ausdauer</option></select></label><button class="primary-btn" id="saveGoal">Ziel speichern</button></article>
@@ -88,6 +150,10 @@
 
     <nav class="tabbar">
       <button class="tab active" data-view="home"><span>⌂</span><small>Home</small></button>
+      <button class="tab" data-view="avatar">
+  <span>♙</span>
+  <small>Avatar</small>
+</button>
       <button class="tab" data-view="training"><span>⌁</span><small>Training</small></button>
       <button class="tab" data-view="coach"><span>✦</span><small>AI Coach</small></button>
       <button class="tab" data-view="photos"><span>▧</span><small>Fotos</small></button>
