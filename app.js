@@ -61,4 +61,78 @@ $('#saveGoal').onclick=()=>{state.goal=$('#goal').value;save();toast('Trainingsz
 $('#exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='pulse-daten.json';a.click();URL.revokeObjectURL(a.href);};
 $('#resetBtn').onclick=()=>{if(confirm('Wirklich alle lokal gespeicherten PULSE-Daten löschen?')){state={workouts:[],goal:'Allgemeine Leistungssteigerung',photos:[]};save();toast('Daten gelöscht');}};
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+
+/* PULSE AVATAR SYSTEM */
+
+state.avatar = state.avatar || {
+  skin: '#f1c7a5',
+  hair: 'Kurz',
+  shirt: '#83c8ff',
+  name: ''
+};
+
+function renderAvatar() {
+  const a = state.avatar;
+  const preview = $('#avatarPreview');
+
+  if (!preview) return;
+
+  preview.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px">
+      <div style="font-size:13px;color:#9baaba">${escapeHtml(a.name || 'Dein Läufer')}</div>
+      <div style="width:64px;height:64px;border-radius:50%;background:${a.skin};position:relative;border:3px solid rgba(255,255,255,.2)">
+        <span style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:17px;color:#20252c">●</span>
+      </div>
+      <div style="width:78px;height:82px;border-radius:20px 20px 12px 12px;background:${a.shirt};display:grid;place-items:center;color:#142333;font-weight:800">
+        P
+      </div>
+      <div style="font-size:12px;color:#dce5ef">${escapeHtml(a.hair)} · PULSE Runner</div>
+      <div style="font-size:28px">👟 👟</div>
+    </div>
+  `;
+
+  $('#avatarName').value = a.name || '';
+
+  $$('[data-skin]').forEach(b =>
+    b.classList.toggle('selected', b.dataset.skin === a.skin)
+  );
+
+  $$('[data-hair]').forEach(b =>
+    b.classList.toggle('selected', b.dataset.hair === a.hair)
+  );
+
+  $$('[data-shirt]').forEach(b =>
+    b.classList.toggle('selected', b.dataset.shirt === a.shirt)
+  );
+}
+
+$$('[data-skin]').forEach(b => {
+  b.addEventListener('click', () => {
+    state.avatar.skin = b.dataset.skin;
+    renderAvatar();
+  });
+});
+
+$$('[data-hair]').forEach(b => {
+  b.addEventListener('click', () => {
+    state.avatar.hair = b.dataset.hair;
+    renderAvatar();
+  });
+});
+
+$$('[data-shirt]').forEach(b => {
+  b.addEventListener('click', () => {
+    state.avatar.shirt = b.dataset.shirt;
+    renderAvatar();
+  });
+});
+
+$('#saveAvatar').addEventListener('click', () => {
+  state.avatar.name = $('#avatarName').value.trim().slice(0,20);
+  localStorage.setItem(KEY, JSON.stringify(state));
+  renderAvatar();
+  toast('Dein PULSE Avatar wurde gespeichert!');
+});
+
+renderAvatar();
 render();
