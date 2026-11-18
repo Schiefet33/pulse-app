@@ -4,7 +4,34 @@ let state=JSON.parse(localStorage.getItem(KEY)||'{"workouts":[],"goal":"Allgemei
 let photoFilter='Alle';
 function save(){localStorage.setItem(KEY,JSON.stringify(state));render();}
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
-function showView(name){$$('.view').forEach(v=>v.classList.toggle('active',v.id===name+'View'));$$('.tab').forEach(b=>b.classList.toggle('active',b.dataset.view===name));window.scrollTo(0,0);}
+function showView(name){
+  const nextView = $('#' + name + 'View');
+  const nextTab = $(`.tab[data-view="${name}"]`);
+
+  if(!nextView) return;
+
+  $$('.view').forEach(v =>
+    v.classList.toggle('active', v === nextView)
+  );
+
+  $$('.tab').forEach(b =>
+    b.classList.toggle('active', b === nextTab)
+  );
+
+  if(nextTab && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    nextTab.animate([
+      { transform: 'translateY(2px) scale(.94)' },
+      { transform: 'translateY(-3px) scale(1.08)' },
+      { transform: 'translateY(-2px) scale(1)' }
+    ], {
+      duration: 420,
+      easing: 'cubic-bezier(.16,1,.3,1)'
+    });
+  }
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
 $$('.tab').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
 $$('[data-go]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.go)));
 $('#settingsBtn').onclick=()=>showView('settings');
