@@ -6,3 +6,179 @@
 .view{display:none;animation:fade .22s ease}.view.active{display:block}@keyframes fade{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}
 h1{font-size:32px;letter-spacing:-1.3px;margin:7px 0}h2{font-size:17px;margin:0;font-weight:700}p{line-height:1.5}.greeting p,.page-heading p{color:var(--muted);font-size:13px;margin:5px 0 20px}.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:14px}.stat-card,.panel{background:var(--panel);border:1px solid rgba(255,255,255,.035);border-radius:var(--radius);padding:17px}.stat-card{min-height:140px;display:flex;flex-direction:column;gap:7px}.stat-icon{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:19px;background:#263b4d}.coral{color:#ff8c91;background:#422c36}.violet{color:#c4a2ff;background:#342e48}.green{color:#70d6a0;background:#233d36}.blue{color:var(--blue)}.muted,small{color:var(--muted);font-size:11px}.stat-card strong{font-size:25px;letter-spacing:-.8px}.panel{margin:13px 0}.coach-panel{background:linear-gradient(145deg,#1c3040,#1a2530 70%)}.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.status-dot{color:var(--green);font-size:10px;font-weight:700;letter-spacing:.5px}.coach-panel p{font-size:13px;color:#c0ccd8;margin:12px 0 16px}.primary-btn,.secondary-btn,.danger-btn,.upload-btn{border:0;border-radius:14px;padding:14px 16px;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer}.primary-btn{width:100%;background:#eaf5ff;color:#142333}.primary-btn:active,.secondary-btn:active,.tab:active{transform:scale(.98)}.text-btn{border:0;background:none;color:var(--blue);font-weight:600}.notice{font-size:10px;line-height:1.5;color:#8293a3;padding:10px 4px}.empty-state{color:var(--muted);font-size:12px;padding:16px 4px}.activity-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--line);font-size:12px}.activity-row strong{display:block}.page-heading{padding:3px 0 4px}.segmented,.filter-row{display:flex;gap:6px;background:#0e151c;padding:5px;border-radius:14px;margin:14px 0}.segmented button,.filter{flex:1;border:0;border-radius:10px;background:transparent;color:var(--muted);padding:10px 5px;font-size:12px}.segmented button.selected,.filter.selected{background:#2a3b49;color:#fff}.form-panel label,.panel label{display:flex;flex-direction:column;gap:7px;color:#c4d0db;font-size:12px;margin:12px 0}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}input,select{width:100%;border:1px solid var(--line);border-radius:12px;background:#111b24;color:var(--text);padding:13px;font:inherit;font-size:13px;min-width:0}input:focus,select:focus{outline:2px solid #6ebcff55;border-color:var(--blue)}.form-panel .primary-btn{margin-top:15px}.coach-intro{display:flex;gap:13px;align-items:center}.coach-intro p{font-size:11px;color:var(--muted);margin:5px 0}.ai-orb{width:48px;height:48px;flex:0 0 48px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#315a7a,#27334d);font-size:25px;color:#9bd4ff}.chat-box{min-height:190px;max-height:42vh;overflow:auto;padding:8px 0}.bubble{max-width:88%;padding:13px 15px;border-radius:17px;margin:9px 0;font-size:13px;line-height:1.5}.bubble.ai{background:var(--panel2);border-bottom-left-radius:5px}.bubble.user{background:#dcefff;color:#142333;margin-left:auto;border-bottom-right-radius:5px}.chat-form{display:flex;gap:8px}.chat-form input{border-radius:15px}.send-btn{width:48px;border:0;border-radius:15px;background:var(--blue);color:#102030;font-size:23px;font-weight:700}.quick-prompts{display:flex;gap:7px;overflow:auto;padding:12px 0}.quick-prompts button{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:#c6d3df;border-radius:20px;padding:9px 12px;font-size:10px}.upload-btn{background:#eaf5ff;color:#142333;width:100%;margin:12px 0}.upload-btn input{display:none}.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.photo-tile{aspect-ratio:1;position:relative;overflow:hidden;border-radius:12px;background:#25313c}.photo-tile img{width:100%;height:100%;object-fit:cover}.photo-tile button{position:absolute;right:5px;top:5px;border:0;background:#111c;color:white;border-radius:20px;padding:5px 7px;font-size:10px}.photo-tag{font-size:10px;color:var(--muted);padding:5px 1px}.evolve-item{display:flex;flex-direction:column;gap:4px;padding:13px 0;border-top:1px solid var(--line);font-size:12px}.evolve-item span{color:var(--muted);font-size:11px}.button-row{display:flex;gap:8px}.secondary-btn,.danger-btn{flex:1;background:#2a3b49;color:#e7f2fb}.danger-btn{background:#452c34;color:#ffb0b5}.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(620px,100%);display:flex;justify-content:space-around;padding:10px 7px calc(10px + env(safe-area-inset-bottom));background:rgba(17,26,35,.94);backdrop-filter:blur(20px);border-top:1px solid #2b3742;z-index:5}.tab{display:flex;flex-direction:column;align-items:center;gap:3px;border:0;background:none;color:#8192a2;min-width:54px;padding:3px}.tab span{font-size:21px;line-height:23px}.tab small{font-size:9px;color:inherit}.tab.active{color:var(--blue)}.toast{position:fixed;bottom:95px;left:50%;transform:translate(-50%,20px);opacity:0;background:#eaf5ff;color:#142333;padding:11px 16px;border-radius:22px;font-size:12px;transition:.2s;z-index:10;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(min-width:600px){.app-shell{padding-left:24px;padding-right:24px}.stats-grid{grid-template-columns:repeat(4,1fr)}.stat-card{min-height:135px}}
+/* =================================
+   PULSE – APPLE STYLE ANIMATIONS
+   ================================= */
+
+/* Flüssige Übergänge */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+.stat-card,
+.panel,
+.tab,
+.icon-btn {
+  transition:
+    transform 0.35s cubic-bezier(.2,.8,.2,1),
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.35s ease,
+    color 0.25s ease;
+}
+
+/* Sanfter Seitenwechsel */
+.view {
+  display: none;
+  animation: pulsePageIn 0.5s cubic-bezier(.16,1,.3,1);
+}
+
+.view.active {
+  display: block;
+}
+
+@keyframes pulsePageIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(.985);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Karten erscheinen nacheinander */
+.view.active .stat-card,
+.view.active .panel {
+  animation: pulseCardIn .65s cubic-bezier(.16,1,.3,1) both;
+}
+
+.view.active .stat-card:nth-child(1) {
+  animation-delay: .04s;
+}
+
+.view.active .stat-card:nth-child(2) {
+  animation-delay: .09s;
+}
+
+.view.active .stat-card:nth-child(3) {
+  animation-delay: .14s;
+}
+
+.view.active .stat-card:nth-child(4) {
+  animation-delay: .19s;
+}
+
+.view.active .panel {
+  animation-delay: .16s;
+}
+
+@keyframes pulseCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Dezente Interaktion mit Karten */
+.stat-card:active,
+.panel:active {
+  transform: scale(.985);
+}
+
+/* Buttons mit federnder Rückbewegung */
+button:active {
+  transform: scale(.96);
+  transition-duration: .12s;
+}
+
+/* Navigation */
+.tab {
+  transition:
+    color .3s ease,
+    transform .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.tab.active {
+  transform: translateY(-2px);
+}
+
+.tab span {
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.tab.active span {
+  transform: scale(1.12);
+}
+
+/* Eingabefelder */
+input,
+select {
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    background-color .25s ease;
+}
+
+input:focus,
+select:focus {
+  box-shadow: 0 0 0 4px rgba(131,200,255,.12);
+}
+
+/* AI Status */
+.status-dot {
+  animation: pulseStatus 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseStatus {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .55;
+  }
+}
+
+/* AI Orb */
+.ai-orb {
+  animation: pulseOrb 4s ease-in-out infinite;
+}
+
+@keyframes pulseOrb {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(131,200,255,0);
+  }
+  50% {
+    transform: scale(1.045);
+    box-shadow: 0 0 24px rgba(131,200,255,.16);
+  }
+}
+
+/* Toast */
+.toast {
+  transition:
+    opacity .35s ease,
+    transform .45s cubic-bezier(.16,1,.3,1);
+}
+
+/* iPhone: weniger Bewegung respektieren */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
