@@ -182,3 +182,74 @@ select:focus {
   }
 }
 
+/* PULSE AVATAR EDITOR */
+
+.avatar-preview {
+  min-height: 260px;
+  display: grid;
+  place-items: center;
+  margin: 12px 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at center, #304b60 0%, #192632 55%, #111a23 100%);
+}
+
+.avatar-character {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  animation: avatarFloat 3s ease-in-out infinite;
+}
+
+.avatar-head {
+  font-size: 65px;
+}
+
+.avatar-body {
+  font-size: 76px;
+  margin-top: -5px;
+}
+
+.avatar-legs {
+  font-size: 42px;
+  margin-top: -10px;
+}
+
+@keyframes avatarFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.avatar-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.avatar-options button {
+  padding: 11px 15px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--panel2);
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+}
+
+.avatar-options button:active {
+  transform: scale(.94);
+}
+
+.avatar-options button.selected {
+  border-color: var(--blue);
+  background: #263e50;
+  box-shadow: 0 0 0 2px #83c8ff22;
+}
+
+#avatarView .primary-btn {
+  margin-top: 15px;
+}
+
