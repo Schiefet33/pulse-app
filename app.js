@@ -2,6 +2,7 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const KEY='pulse-v01-data';
 const DEFAULT_GOAL='Allgemeine Leistungssteigerung';
 const DEFAULT_AVATAR={skin:'#f1c7a5',hair:'Kurz',shirt:'#83c8ff',name:''};
+const DEFAULT_BODY={height:'',weight:''};
 
 function loadState(){
   let saved={};
@@ -10,7 +11,8 @@ function loadState(){
     workouts:Array.isArray(saved.workouts)?saved.workouts:[],
     goal:saved.goal||DEFAULT_GOAL,
     photos:[],
-    avatar:{...DEFAULT_AVATAR,...(saved.avatar||{})}
+    avatar:{...DEFAULT_AVATAR,...(saved.avatar||{})},
+    body:{...DEFAULT_BODY,...(saved.body||{})}
   };
 }
 
@@ -19,14 +21,14 @@ let photoFilter='Alle';
 
 function persist(){
   try{
-    localStorage.setItem(KEY,JSON.stringify({workouts:state.workouts,goal:state.goal,avatar:state.avatar}));
+    localStorage.setItem(KEY,JSON.stringify({workouts:state.workouts,goal:state.goal,avatar:state.avatar,body:state.body}));
   }catch(e){}
 }
 function save(){persist();render();}
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 
 function showView(name){
-  const TAB_OF={avatar:'profile',photos:'profile',evolve:'profile',settings:'profile'};
+  const TAB_OF={avatar:'profile',body:'profile',photos:'profile',evolve:'profile',settings:'profile'};
   const nextView=$('#'+name+'View');
   const nextTab=$(`.tab[data-view="${TAB_OF[name]||name}"]`);
   if(!nextView)return;
@@ -176,7 +178,7 @@ function render(){
 $('#saveGoal').onclick=()=>{state.goal=$('#goal').value;save();toast('Trainingsziel gespeichert');};
 
 $('#exportBtn').onclick=()=>{
-  const data={workouts:state.workouts,goal:state.goal,avatar:state.avatar};
+  const data={workouts:state.workouts,goal:state.goal,avatar:state.avatar,body:state.body};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
@@ -187,10 +189,11 @@ $('#exportBtn').onclick=()=>{
 
 $('#resetBtn').onclick=()=>{
   if(confirm('Wirklich alle lokal gespeicherten PULSE-Daten löschen?')){
-    state={workouts:[],goal:DEFAULT_GOAL,photos:[],avatar:{...DEFAULT_AVATAR}};
+    state={workouts:[],goal:DEFAULT_GOAL,photos:[],avatar:{...DEFAULT_AVATAR},body:{...DEFAULT_BODY}};
     $('#avatarName').value='';
     save();
     renderAvatar();
+    renderBody();
     toast('Daten gelöscht');
   }
 };
@@ -198,6 +201,51 @@ $('#resetBtn').onclick=()=>{
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 }
+
+/* PULSE KÖRPERDATEN & BMI */
+
+function bmiInfo(h,w){
+  if(!(h>=100&&h<=250&&w>=30&&w<=300))return null;
+  const bmi=w/Math.pow(h/100,2);
+  let label='Normalgewicht';
+  if(bmi<18.5)label='Untergewicht';
+  else if(bmi>=30)label='Adipositas';
+  else if(bmi>=25)label='Übergewicht';
+  return {bmi,label};
+}
+
+function renderBmi(h,w){
+  const out=$('#bmiResult');
+  const info=bmiInfo(h,w);
+  if(!info){
+    out.innerHTML='Gib Größe (100–250 cm) und Gewicht (30–300 kg) ein, dann berechne ich deinen BMI.';
+    return;
+  }
+  out.innerHTML=`<div style="display:flex;align-items:baseline;gap:12px;padding:6px 0 4px"><strong style="font-size:38px;letter-spacing:-1.5px;color:var(--text)">${info.bmi.toFixed(1).replace('.',',')}</strong><span>BMI · ${info.label} (WHO, Erwachsene)</span></div>`;
+}
+
+function renderBody(){
+  $('#bodyHeight').value=state.body.height;
+  $('#bodyWeight').value=state.body.weight;
+  renderBmi(Number(state.body.height),Number(state.body.weight));
+}
+
+['#bodyHeight','#bodyWeight'].forEach(sel=>{
+  $(sel).addEventListener('input',()=>renderBmi(Number($('#bodyHeight').value),Number($('#bodyWeight').value)));
+});
+
+$('#saveBody').addEventListener('click',()=>{
+  const h=Number($('#bodyHeight').value);
+  const w=Number($('#bodyWeight').value);
+  if(!bmiInfo(h,w)){
+    toast('Bitte gültige Werte eingeben');
+    return;
+  }
+  state.body={height:h,weight:w};
+  persist();
+  renderBmi(h,w);
+  toast('Körperdaten gespeichert');
+});
 
 /* PULSE AVATAR SYSTEM */
 
@@ -257,4 +305,5 @@ $('#saveAvatar').addEventListener('click',()=>{
 
 $('#avatarName').value=state.avatar.name||'';
 renderAvatar();
+renderBody();
 render();
