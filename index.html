@@ -23,7 +23,7 @@
       <section class="view active" id="homeView">
         <div class="greeting"><div class="eyebrow">DEIN ÜBERBLICK</div><h1>Hallo! 👋</h1><p>Dein Training. Deine Fortschritte. Alles an einem Ort.</p></div>
         <div class="stats-grid">
-          <article class="stat-card"><span class="stat-icon blue">↗</span><span class="muted">Laufdistanz</span><strong id="weekKm">0,0 km</strong><small>Diese Woche erfasst</small></article>
+          <article class="stat-card"><span class="stat-icon blue">↗</span><span class="muted">Laufdistanz</span><strong id="weekKm">0,0 km</strong><small>Insgesamt erfasst</small></article>
           <article class="stat-card"><span class="stat-icon coral">♥</span><span class="muted">Trainings</span><strong id="workoutCount">0</strong><small>Gespeicherte Einheiten</small></article>
           <article class="stat-card"><span class="stat-icon violet">▤</span><span class="muted">Krafttraining</span><strong id="strengthCount">0</strong><small>Krafteinheiten</small></article>
           <article class="stat-card"><span class="stat-icon green">◎</span><span class="muted">Fotos</span><strong id="photoCount">0</strong><small>In dieser Sitzung ausgewählt</small></article>
@@ -61,11 +61,79 @@
         <div class="quick-prompts"><button data-prompt="Analysiere meine Trainingswoche.">Wochenanalyse</button><button data-prompt="Was soll ich heute trainieren?">Heutiges Training</button><button data-prompt="Wie kann ich meine Laufleistung verbessern?">Lauf verbessern</button></div>
       </section>
 
+      <section class="view" id="profileView">
+        <div class="page-heading"><div class="eyebrow">DEIN BEREICH</div><h1>Profil</h1><p>Avatar, Fotos und Einstellungen.</p></div>
+        <article class="panel menu-list">
+          <button class="menu-item" data-go="avatar"><span class="menu-icon">♙</span><b>Mein Avatar</b><i>›</i></button>
+          <button class="menu-item" data-go="photos"><span class="menu-icon">▧</span><b>Fotos</b><i>›</i></button>
+          <button class="menu-item" data-go="evolve"><span class="menu-icon">⟳</span><b>Evolve & Daten</b><i>›</i></button>
+          <button class="menu-item" data-go="settings"><span class="menu-icon">⚙</span><b>Einstellungen</b><i>›</i></button>
+        </article>
+      </section>
+
+      <section class="view" id="avatarView">
+        <button class="text-btn back" data-go="profile">‹ Profil</button>
+        <div class="page-heading">
+          <div class="eyebrow">DEIN PERSÖNLICHER CHARAKTER</div>
+          <h1>Mein Avatar</h1>
+          <p>Gestalte deinen eigenen PULSE-Läufer.</p>
+        </div>
+
+        <article class="panel avatar-preview-panel">
+          <div class="panel-heading">
+            <h2>Dein Charakter</h2>
+            <span class="status-dot">● DEIN AVATAR</span>
+          </div>
+          <div id="avatarPreview" class="avatar-preview"></div>
+          <p class="muted">Dein Charakter wird später auch auf PULSE LIVE angezeigt.</p>
+        </article>
+
+        <article class="panel">
+          <h2>Hautfarbe</h2>
+          <div id="skinOptions" class="avatar-options">
+            <button data-skin="#f1c7a5">Hell</button>
+            <button data-skin="#d99b70">Mittel</button>
+            <button data-skin="#a96845">Dunkel</button>
+            <button data-skin="#70452f">Sehr dunkel</button>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>Frisur</h2>
+          <div id="hairOptions" class="avatar-options">
+            <button data-hair="Kurz">Kurz</button>
+            <button data-hair="Modern">Modern</button>
+            <button data-hair="Lang">Lang</button>
+            <button data-hair="Glatze">Glatze</button>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>Laufshirt</h2>
+          <div id="shirtOptions" class="avatar-options">
+            <button data-shirt="#83c8ff">Blau</button>
+            <button data-shirt="#70d6a0">Grün</button>
+            <button data-shirt="#ff8c91">Rot</button>
+            <button data-shirt="#f4f7fb">Weiß</button>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>Dein Avatar-Name</h2>
+          <label>
+            Name
+            <input id="avatarName" maxlength="20" placeholder="Mein Läufername">
+          </label>
+          <button class="primary-btn" id="saveAvatar">Avatar speichern ✦</button>
+        </article>
+      </section>
+
       <section class="view" id="photosView">
+        <button class="text-btn back" data-go="profile">‹ Profil</button>
         <div class="page-heading"><div class="eyebrow">DEINE BIBLIOTHEK</div><h1>Fotos</h1><p>Wähle Bilder aus und sortiere sie in dieser App-Ansicht.</p></div>
         <article class="panel">
           <div class="panel-heading"><h2>Fotos hinzufügen</h2><span class="muted">Privat</span></div>
-          <p class="muted">Du wählst selbst aus, welche Bilder du PULSE zeigen möchtest. Die Auswahl wird nicht hochgeladen.</p>
+          <p class="muted">Du wählst selbst aus, welche Bilder du PULSE zeigen möchtest. Die Auswahl wird nicht hochgeladen und nicht dauerhaft gespeichert.</p>
           <label class="upload-btn">＋ Fotos auswählen<input id="photoPicker" type="file" accept="image/*" multiple></label>
           <div class="filter-row"><button class="filter selected" data-filter="Alle">Alle</button><button class="filter" data-filter="Sport">Sport</button><button class="filter" data-filter="Reisen">Reisen</button><button class="filter" data-filter="Sonstiges">Sonstiges</button></div>
           <div id="photoGrid" class="photo-grid"><div class="empty-state">Noch keine Bilder ausgewählt.</div></div>
@@ -74,90 +142,25 @@
       </section>
 
       <section class="view" id="evolveView">
+        <button class="text-btn back" data-go="profile">‹ Profil</button>
         <div class="page-heading"><div class="eyebrow">KONTINUIERLICHE VERBESSERUNG</div><h1>EVOLVE</h1><p>PULSE wird mit überprüfbaren Verbesserungen weiterentwickelt.</p></div>
         <article class="panel"><div class="panel-heading"><h2>Dein Lernkreislauf</h2><span class="status-dot">● AKTIV</span></div><div class="evolve-item"><b>01 · Erfassen</b><span>Trainingsdaten lokal speichern</span></div><div class="evolve-item"><b>02 · Analysieren</b><span>Entwicklung und Muster vergleichen</span></div><div class="evolve-item"><b>03 · Verbessern</b><span>Konkrete Trainingsvorschläge erstellen</span></div><div class="evolve-item"><b>04 · Überprüfen</b><span>Ergebnis und Wohlbefinden berücksichtigen</span></div></article>
         <article class="panel"><h2>Datenschutz & Daten</h2><p class="muted">Deine Einträge bleiben in diesem Browser auf deinem Gerät. Du kannst sie exportieren oder zurücksetzen.</p><div class="button-row"><button class="secondary-btn" id="exportBtn">Daten exportieren</button><button class="danger-btn" id="resetBtn">Alle Daten löschen</button></div></article>
       </section>
 
-<section class="view" id="avatarView">
-  <div class="page-heading">
-    <div class="eyebrow">DEIN PERSÖNLICHER CHARAKTER</div>
-    <h1>Mein Avatar</h1>
-    <p>Gestalte deinen eigenen PULSE-Läufer.</p>
-  </div>
-
-  <article class="panel avatar-preview-panel">
-    <div class="panel-heading">
-      <h2>Dein Charakter</h2>
-      <span class="status-dot">● DEIN AVATAR</span>
-    </div>
-    <div id="avatarPreview" class="avatar-preview">
-      <div class="avatar-character">
-        <div class="avatar-head">🙂</div>
-        <div class="avatar-body">👕</div>
-        <div class="avatar-legs">👟</div>
-      </div>
-    </div>
-    <p class="muted">Dein Charakter wird später auch auf PULSE LIVE angezeigt.</p>
-  </article>
-
-  <article class="panel">
-    <h2>Hautfarbe</h2>
-    <div id="skinOptions" class="avatar-options">
-      <button data-skin="#f1c7a5">Hell</button>
-      <button data-skin="#d99b70">Mittel</button>
-      <button data-skin="#a96845">Dunkel</button>
-      <button data-skin="#70452f">Sehr dunkel</button>
-    </div>
-  </article>
-
-  <article class="panel">
-    <h2>Frisur</h2>
-    <div id="hairOptions" class="avatar-options">
-      <button data-hair="Kurz">Kurz</button>
-      <button data-hair="Modern">Modern</button>
-      <button data-hair="Lang">Lang</button>
-      <button data-hair="Glatze">Glatze</button>
-    </div>
-  </article>
-
-  <article class="panel">
-    <h2>Laufshirt</h2>
-    <div id="shirtOptions" class="avatar-options">
-      <button data-shirt="#83c8ff">Blau</button>
-      <button data-shirt="#70d6a0">Grün</button>
-      <button data-shirt="#ff8c91">Rot</button>
-      <button data-shirt="#f4f7fb">Weiß</button>
-    </div>
-  </article>
-
-  <article class="panel">
-    <h2>Dein Avatar-Name</h2>
-    <label>
-      Name
-      <input id="avatarName" maxlength="20" placeholder="Mein Läufername">
-    </label>
-    <button class="primary-btn" id="saveAvatar">Avatar speichern ✦</button>
-  </article>
-</section>
-
       <section class="view" id="settingsView">
+        <button class="text-btn back" data-go="profile">‹ Profil</button>
         <div class="page-heading"><div class="eyebrow">PULSE</div><h1>Einstellungen</h1></div>
         <article class="panel"><h2>Dein Trainingsziel</h2><label>Hauptziel<select id="goal"><option>Allgemeine Leistungssteigerung</option><option>10 km unter 40 Minuten</option><option>Halbmarathon unter 1:30 Stunden</option><option>Marathon unter 3 Stunden</option><option>Muskelaufbau und Ausdauer</option></select></label><button class="primary-btn" id="saveGoal">Ziel speichern</button></article>
-        <article class="panel"><h2>Über PULSE</h2><p class="muted">PULSE ist ein persönlicher Fitness- und Fotoorganisations-Prototyp. Version 0.1 · lokale Demo.</p><p class="muted">Noch nicht enthalten: echte KI-Cloud-Anbindung, Garmin Connect IQ, HealthKit, GPS-Aufzeichnung und automatische App-Updates.</p></article>
+        <article class="panel"><h2>Über PULSE</h2><p class="muted">PULSE ist ein persönlicher Fitness-Prototyp. Version 0.2 · lokale Demo.</p><p class="muted">Noch nicht enthalten: Login, Cloud-KI-Anbindung, Garmin, HealthKit und GPS-Aufzeichnung.</p></article>
       </section>
     </main>
 
     <nav class="tabbar">
       <button class="tab active" data-view="home"><span>⌂</span><small>Home</small></button>
-      <button class="tab" data-view="avatar">
-  <span>♙</span>
-  <small>Avatar</small>
-</button>
       <button class="tab" data-view="training"><span>⌁</span><small>Training</small></button>
       <button class="tab" data-view="coach"><span>✦</span><small>AI Coach</small></button>
-      <button class="tab" data-view="photos"><span>▧</span><small>Fotos</small></button>
-      <button class="tab" data-view="evolve"><span>⟳</span><small>Evolve</small></button>
+      <button class="tab" data-view="profile"><span>♙</span><small>Profil</small></button>
     </nav>
   </div>
   <div id="toast" class="toast" role="status"></div>
