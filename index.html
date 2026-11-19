@@ -62,13 +62,28 @@
       </section>
 
       <section class="view" id="profileView">
-        <div class="page-heading"><div class="eyebrow">DEIN BEREICH</div><h1>Profil</h1><p>Avatar, Fotos und Einstellungen.</p></div>
+        <div class="page-heading"><div class="eyebrow">DEIN BEREICH</div><h1>Profil</h1><p>Avatar, Körperdaten und Einstellungen.</p></div>
         <article class="panel menu-list">
           <button class="menu-item" data-go="avatar"><span class="menu-icon">♙</span><b>Mein Avatar</b><i>›</i></button>
+          <button class="menu-item" data-go="body"><span class="menu-icon">⚖</span><b>Körperdaten & BMI</b><i>›</i></button>
           <button class="menu-item" data-go="photos"><span class="menu-icon">▧</span><b>Fotos</b><i>›</i></button>
           <button class="menu-item" data-go="evolve"><span class="menu-icon">⟳</span><b>Evolve & Daten</b><i>›</i></button>
           <button class="menu-item" data-go="settings"><span class="menu-icon">⚙</span><b>Einstellungen</b><i>›</i></button>
         </article>
+      </section>
+
+      <section class="view" id="bodyView">
+        <button class="text-btn back" data-go="profile">‹ Profil</button>
+        <div class="page-heading"><div class="eyebrow">DEINE WERTE</div><h1>Körperdaten</h1><p>Größe und Gewicht. Daraus wird dein BMI berechnet.</p></div>
+        <article class="panel">
+          <div class="form-row">
+            <label>Größe (cm)<input id="bodyHeight" type="number" inputmode="decimal" min="100" max="250" step="1" placeholder="178"></label>
+            <label>Gewicht (kg)<input id="bodyWeight" type="number" inputmode="decimal" min="30" max="300" step="0.1" placeholder="72.5"></label>
+          </div>
+          <div id="bmiResult" class="bmi-result muted">Gib Größe und Gewicht ein, dann berechne ich deinen BMI.</div>
+          <button class="primary-btn" id="saveBody">Körperdaten speichern ✦</button>
+        </article>
+        <div class="notice">Der BMI ist nur eine grobe Orientierung für Erwachsene und berücksichtigt weder Muskelmasse noch Körperbau. Er ersetzt keine ärztliche Einschätzung. Deine Werte bleiben auf diesem Gerät.</div>
       </section>
 
       <section class="view" id="avatarView">
@@ -152,7 +167,7 @@
         <button class="text-btn back" data-go="profile">‹ Profil</button>
         <div class="page-heading"><div class="eyebrow">PULSE</div><h1>Einstellungen</h1></div>
         <article class="panel"><h2>Dein Trainingsziel</h2><label>Hauptziel<select id="goal"><option>Allgemeine Leistungssteigerung</option><option>10 km unter 40 Minuten</option><option>Halbmarathon unter 1:30 Stunden</option><option>Marathon unter 3 Stunden</option><option>Muskelaufbau und Ausdauer</option></select></label><button class="primary-btn" id="saveGoal">Ziel speichern</button></article>
-        <article class="panel"><h2>Über PULSE</h2><p class="muted">PULSE ist ein persönlicher Fitness-Prototyp. Version 0.2 · lokale Demo.</p><p class="muted">Noch nicht enthalten: Login, Cloud-KI-Anbindung, Garmin, HealthKit und GPS-Aufzeichnung.</p></article>
+        <article class="panel"><h2>Über PULSE</h2><p class="muted">PULSE ist ein persönlicher Fitness-Prototyp. Version 0.3 · lokale Demo.</p><p class="muted">Noch nicht enthalten: Login, Cloud-KI-Anbindung, Garmin, HealthKit und GPS-Aufzeichnung.</p></article>
       </section>
     </main>
 
