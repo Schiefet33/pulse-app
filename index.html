@@ -13,7 +13,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app-shell">
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-box">
+      <div class="brand">PULSE<span>.</span></div>
+      <div class="eyebrow">YOUR PERFORMANCE HUB</div>
+      <div id="authBoot" class="muted" style="margin-top:28px">Lade …</div>
+      <article class="panel" id="authCard" hidden>
+        <div class="segmented" id="authTabs">
+          <button class="selected" data-auth="login" type="button">Anmelden</button>
+          <button data-auth="register" type="button">Registrieren</button>
+        </div>
+        <form id="authForm" novalidate>
+          <label id="authEmailLabel">E-Mail<input id="authEmail" type="email" autocomplete="email" inputmode="email" autocapitalize="none"></label>
+          <label id="authPwLabel"><span id="authPwText">Passwort</span><input id="authPassword" type="password" autocomplete="current-password"></label>
+          <div id="authMsg" class="auth-msg" role="alert"></div>
+          <button class="primary-btn" id="authSubmit" type="submit">Anmelden</button>
+        </form>
+        <button class="text-btn" id="authForgot" type="button" style="margin-top:12px">Passwort vergessen?</button>
+      </article>
+      <div class="notice">Deine Trainings- und Körperdaten sind nur für dich sichtbar. Admins sehen lediglich E-Mail-Adresse und Rolle.</div>
+    </div>
+  </div>
+
+  <div class="app-shell" hidden>
     <header class="topbar">
       <div><div class="brand">PULSE<span>.</span></div><div class="eyebrow">YOUR PERFORMANCE HUB</div></div>
       <button class="icon-btn" id="settingsBtn" aria-label="Einstellungen">⚙</button>
@@ -37,7 +59,7 @@
           <div class="panel-heading"><h2>Letzte Aktivitäten</h2><button class="text-btn" data-go="training">Alle ansehen</button></div>
           <div id="recentList" class="empty-state">Noch keine Trainings gespeichert.</div>
         </article>
-        <div class="notice">Demo-Version: Werte werden lokal auf diesem Gerät gespeichert. Noch keine Verbindung zu Garmin oder Apple Health.</div>
+        <div class="notice">Demo-Version: Noch keine Verbindung zu Garmin oder Apple Health.</div>
       </section>
 
       <section class="view" id="trainingView">
@@ -55,7 +77,7 @@
 
       <section class="view" id="coachView">
         <div class="page-heading"><div class="eyebrow">PERSÖNLICHER TRAININGSBERATER</div><h1>PULSE AI</h1><p>Frage nach Training, Zielen und Fortschritt.</p></div>
-        <article class="panel coach-intro"><div class="ai-orb">✦</div><div><h2>Dein Coach, dein Fortschritt.</h2><p>Diese erste Version nutzt deine lokal gespeicherten Trainingsdaten und einfache Trainingsregeln. Noch kein verbundenes Cloud-KI-Modell.</p></div></article>
+        <article class="panel coach-intro"><div class="ai-orb">✦</div><div><h2>Dein Coach, dein Fortschritt.</h2><p>Diese erste Version nutzt deine gespeicherten Trainingsdaten und einfache Trainingsregeln. Noch kein verbundenes Cloud-KI-Modell.</p></div></article>
         <div class="chat-box" id="chatBox"><div class="bubble ai">Hi! Ich bin PULSE AI. Erzähl mir dein Ziel oder frage mich, was du als Nächstes trainieren könntest.</div></div>
         <form id="chatForm" class="chat-form"><input id="chatInput" placeholder="z. B. Wie läuft meine Trainingswoche?" autocomplete="off"><button aria-label="Senden" class="send-btn">↑</button></form>
         <div class="quick-prompts"><button data-prompt="Analysiere meine Trainingswoche.">Wochenanalyse</button><button data-prompt="Was soll ich heute trainieren?">Heutiges Training</button><button data-prompt="Wie kann ich meine Laufleistung verbessern?">Lauf verbessern</button></div>
@@ -68,7 +90,8 @@
           <button class="menu-item" data-go="body"><span class="menu-icon">⚖</span><b>Körperdaten & BMI</b><i>›</i></button>
           <button class="menu-item" data-go="photos"><span class="menu-icon">▧</span><b>Fotos</b><i>›</i></button>
           <button class="menu-item" data-go="evolve"><span class="menu-icon">⟳</span><b>Evolve & Daten</b><i>›</i></button>
-          <button class="menu-item" data-go="settings"><span class="menu-icon">⚙</span><b>Einstellungen</b><i>›</i></button>
+          <button class="menu-item" data-go="settings"><span class="menu-icon">⚙</span><b>Einstellungen & Konto</b><i>›</i></button>
+          <button class="menu-item" id="adminMenu" data-go="admin" hidden><span class="menu-icon">★</span><b>Admin</b><i>›</i></button>
         </article>
       </section>
 
@@ -83,7 +106,7 @@
           <div id="bmiResult" class="bmi-result muted">Gib Größe und Gewicht ein, dann berechne ich deinen BMI.</div>
           <button class="primary-btn" id="saveBody">Körperdaten speichern ✦</button>
         </article>
-        <div class="notice">Der BMI ist nur eine grobe Orientierung für Erwachsene und berücksichtigt weder Muskelmasse noch Körperbau. Er ersetzt keine ärztliche Einschätzung. Deine Werte bleiben auf diesem Gerät.</div>
+        <div class="notice">Der BMI ist nur eine grobe Orientierung für Erwachsene und berücksichtigt weder Muskelmasse noch Körperbau. Er ersetzt keine ärztliche Einschätzung. Deine Werte sind nur in deinem Konto gespeichert.</div>
       </section>
 
       <section class="view" id="avatarView">
@@ -159,15 +182,22 @@
       <section class="view" id="evolveView">
         <button class="text-btn back" data-go="profile">‹ Profil</button>
         <div class="page-heading"><div class="eyebrow">KONTINUIERLICHE VERBESSERUNG</div><h1>EVOLVE</h1><p>PULSE wird mit überprüfbaren Verbesserungen weiterentwickelt.</p></div>
-        <article class="panel"><div class="panel-heading"><h2>Dein Lernkreislauf</h2><span class="status-dot">● AKTIV</span></div><div class="evolve-item"><b>01 · Erfassen</b><span>Trainingsdaten lokal speichern</span></div><div class="evolve-item"><b>02 · Analysieren</b><span>Entwicklung und Muster vergleichen</span></div><div class="evolve-item"><b>03 · Verbessern</b><span>Konkrete Trainingsvorschläge erstellen</span></div><div class="evolve-item"><b>04 · Überprüfen</b><span>Ergebnis und Wohlbefinden berücksichtigen</span></div></article>
-        <article class="panel"><h2>Datenschutz & Daten</h2><p class="muted">Deine Einträge bleiben in diesem Browser auf deinem Gerät. Du kannst sie exportieren oder zurücksetzen.</p><div class="button-row"><button class="secondary-btn" id="exportBtn">Daten exportieren</button><button class="danger-btn" id="resetBtn">Alle Daten löschen</button></div></article>
+        <article class="panel"><div class="panel-heading"><h2>Dein Lernkreislauf</h2><span class="status-dot">● AKTIV</span></div><div class="evolve-item"><b>01 · Erfassen</b><span>Trainingsdaten speichern</span></div><div class="evolve-item"><b>02 · Analysieren</b><span>Entwicklung und Muster vergleichen</span></div><div class="evolve-item"><b>03 · Verbessern</b><span>Konkrete Trainingsvorschläge erstellen</span></div><div class="evolve-item"><b>04 · Überprüfen</b><span>Ergebnis und Wohlbefinden berücksichtigen</span></div></article>
+        <article class="panel"><h2>Datenschutz & Daten</h2><p class="muted">Deine Einträge sind in deinem Konto gespeichert. Du kannst sie exportieren oder löschen.</p><div class="button-row"><button class="secondary-btn" id="exportBtn">Daten exportieren</button><button class="danger-btn" id="resetBtn">Alle Daten löschen</button></div></article>
       </section>
 
       <section class="view" id="settingsView">
         <button class="text-btn back" data-go="profile">‹ Profil</button>
         <div class="page-heading"><div class="eyebrow">PULSE</div><h1>Einstellungen</h1></div>
+        <article class="panel"><h2>Konto</h2><p class="muted" id="accountEmail" style="margin:8px 0 2px"></p><p class="muted" style="margin:0 0 12px">Rolle: <span id="accountRole"></span></p><button class="secondary-btn" id="logoutBtn" style="width:100%">Abmelden</button></article>
         <article class="panel"><h2>Dein Trainingsziel</h2><label>Hauptziel<select id="goal"><option>Allgemeine Leistungssteigerung</option><option>10 km unter 40 Minuten</option><option>Halbmarathon unter 1:30 Stunden</option><option>Marathon unter 3 Stunden</option><option>Muskelaufbau und Ausdauer</option></select></label><button class="primary-btn" id="saveGoal">Ziel speichern</button></article>
-        <article class="panel"><h2>Über PULSE</h2><p class="muted">PULSE ist ein persönlicher Fitness-Prototyp. Version 0.3 · lokale Demo.</p><p class="muted">Noch nicht enthalten: Login, Cloud-KI-Anbindung, Garmin, HealthKit und GPS-Aufzeichnung.</p></article>
+        <article class="panel"><h2>Über PULSE</h2><p class="muted">PULSE ist ein persönlicher Fitness-Prototyp. Version 0.4 · mit Konto.</p><p class="muted">Noch nicht enthalten: Cloud-KI-Anbindung, Garmin, HealthKit und GPS-Aufzeichnung.</p></article>
+      </section>
+
+      <section class="view" id="adminView">
+        <button class="text-btn back" data-go="profile">‹ Profil</button>
+        <div class="page-heading"><div class="eyebrow">VERWALTUNG</div><h1>Admin</h1><p>Nutzer und Rollen. Private Trainings- und Gesundheitsdaten sind für Admins nicht sichtbar.</p></div>
+        <article class="panel"><div class="panel-heading"><h2>Nutzer</h2><span class="muted" id="adminCount"></span></div><div id="adminList" class="empty-state">Lade …</div></article>
       </section>
     </main>
 
@@ -179,6 +209,8 @@
     </nav>
   </div>
   <div id="toast" class="toast" role="status"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
+
