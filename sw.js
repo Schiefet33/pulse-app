@@ -1,4 +1,4 @@
-const CACHE='pulse-shell-v2';
+const CACHE='pulse-shell-v3';
 const FILES=['./','./index.html','./style.css','./app.js','./manifest.webmanifest','./icons/pulse-192.png','./icons/pulse-512.png'];
 
 self.addEventListener('install',e=>{
@@ -19,6 +19,7 @@ self.addEventListener('activate',e=>{
 
 self.addEventListener('fetch',e=>{
   if(e.request.method!=='GET')return;
+  if(new URL(e.request.url).origin!==self.location.origin)return;
   e.respondWith(
     fetch(e.request)
       .then(response=>{
