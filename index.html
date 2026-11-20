@@ -10,7 +10,7 @@
   <title>PULSE – Dein persönlicher Fitness-Hub</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/pulse-192.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
   <div id="authScreen" class="auth-screen">
@@ -209,8 +209,25 @@
     </nav>
   </div>
   <div id="toast" class="toast" role="status"></div>
+
+  <script>
+    window.addEventListener('error',function(e){
+      var b=document.getElementById('authBoot');
+      if(!b)return;
+      var t=(e.target&&e.target.src)?'Datei konnte nicht geladen werden: '+e.target.src:'Fehler: '+e.message+' (Zeile '+e.lineno+')';
+      b.hidden=false;b.textContent=t;b.style.color='#ffb0b5';
+    },true);
+    window.addEventListener('unhandledrejection',function(e){
+      var b=document.getElementById('authBoot');
+      if(!b)return;
+      b.hidden=false;b.textContent='Fehler: '+(e.reason&&e.reason.message?e.reason.message:e.reason);b.style.color='#ffb0b5';
+    });
+    setTimeout(function(){
+      var b=document.getElementById('authBoot');
+      if(b&&!b.hidden&&b.textContent.indexOf('Lade')===0){b.textContent='Start nicht möglich: app.js wurde nicht ausgeführt.';b.style.color='#ffb0b5';}
+    },6000);
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
-
